@@ -19,7 +19,7 @@ export default async (
   }
 
   try {
-    const token = authHeader.replace('Bearer', '');
+    const token = authHeader.replace('Bearer ', '');
     const decoded = jwt.verify(token, authConfig.secret) as JwtPayload;
 
     request.userId = decoded.id;
