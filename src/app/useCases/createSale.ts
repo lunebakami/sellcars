@@ -10,5 +10,7 @@ export const createSale = async (request: Request, response: Response) => {
     carId,
   });
 
+  // TODO: Add to queue
+
   response.json(sale);
 };
