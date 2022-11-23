@@ -6,7 +6,11 @@ type MailData = {
       name: string;
       email: string;
     };
-    car: string;
+    car: {
+      title: string;
+      brand: string;
+      price: string;
+    };
   };
 };
 

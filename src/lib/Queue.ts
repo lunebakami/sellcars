@@ -5,11 +5,6 @@ import redisConfig from '../config/redis';
 
 const jobs = [ApprovationMail];
 
-type Job = {
-  bee: BeeQueue;
-  handle: Function;
-};
-
 type FailedJob = {
   queue: {
     name: string;
@@ -17,7 +12,10 @@ type FailedJob = {
 };
 
 type QueueType = {
-  [key: string]: Job;
+  [key: string]: {
+    bee: BeeQueue;
+    handle: Function;
+  };
 };
 
 interface QueueLib {
@@ -44,8 +42,8 @@ class Queue implements QueueLib {
     });
   }
 
-  add(queue: string, job: Job) {
-    return this.queues[queue].bee.createJob(job).save();
+  add(queue: string, jobData: Record<string, unknown>) {
+    return this.queues[queue].bee.createJob(jobData).save();
   }
 
   processQueue() {
