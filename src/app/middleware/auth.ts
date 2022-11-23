@@ -22,7 +22,7 @@ export default async (
     const token = authHeader.replace('Bearer ', '');
     const decoded = jwt.verify(token, authConfig.secret) as JwtPayload;
 
-    request.userId = decoded.id;
+    response.locals.userId = decoded.id;
 
     return next();
   } catch (err) {
